@@ -29,8 +29,8 @@ Uma API REST simples e robusta para gerenciamento de tarefas, construída com **
 
 ### 1. Clone o repositório
 ```bash
-git clone https://github.com/seu-usuario/api-tarefas.git
-cd api-tarefas
+git clone https://github.com/lucasbeniti/laravel12-todo-api.git
+cd laravel12-todo-api
 ```
 
 ### 2. Instale as dependências
