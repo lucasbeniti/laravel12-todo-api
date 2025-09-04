@@ -6,7 +6,7 @@ Uma API REST simples e robusta para gerenciamento de tarefas, construída com **
 
 - **Laravel 12** - Framework PHP
 - **Laravel Sanctum** - Autenticação de API
-- **MySQL/PostgreSQL** - Banco de dados
+- **MySQL** - Banco de dados
 - **PHP 8.3+** - Linguagem de programação
 
 ## ⚡ Funcionalidades
@@ -24,7 +24,6 @@ Uma API REST simples e robusta para gerenciamento de tarefas, construída com **
 - PHP 8.3 ou superior
 - Composer
 - MySQL ou PostgreSQL
-- Node.js (opcional, para assets)
 
 ## 🔧 Instalação e Configuração
 
@@ -58,12 +57,6 @@ DB_PASSWORD=sua_senha
 
 ### 5. Execute as migrações
 ```bash
-php artisan migrate
-```
-
-### 6. Configure o Sanctum
-```bash
-php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
 php artisan migrate
 ```
 
@@ -340,27 +333,3 @@ curl -X GET "http://localhost:8000/api/tasks" \
 │   └── api.php
 └── README.md
 ```
-
-## 🤝 Contribuição
-
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`)
-3. Commit suas mudanças (`git commit -am 'Adiciona nova feature'`)
-4. Push para a branch (`git push origin feature/nova-feature`)
-5. Abra um Pull Request
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-## 🆘 Suporte
-
-Se você encontrar algum problema ou tiver dúvidas:
-
-1. Verifique se seguiu todos os passos de instalação
-2. Confira os logs em `storage/logs/laravel.log`
-3. Abra uma issue no GitHub
-
----
-
-**Desenvolvido com ❤️ usando Laravel**
