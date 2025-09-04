@@ -310,26 +310,3 @@ curl -X GET "http://localhost:8000/api/tasks" \
 1. Importe a collection (se disponível)
 2. Configure a variável de ambiente `token` após o login
 3. Teste todos os endpoints
-
-## 📁 Estrutura do Projeto
-
-```
-├── app/
-│   ├── Http/
-│   │   ├── Controllers/
-│   │   │   ├── AuthController.php
-│   │   │   └── TaskController.php
-│   │   └── Requests/
-│   │       ├── StoreTaskRequest.php
-│   │       └── UpdateTaskRequest.php
-│   ├── Models/
-│   │   ├── Task.php
-│   │   └── User.php
-│   └── Policies/
-│       └── TaskPolicy.php
-├── database/
-│   └── migrations/
-├── routes/
-│   └── api.php
-└── README.md
-```
