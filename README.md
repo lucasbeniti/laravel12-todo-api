@@ -1,61 +1,366 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📝 API de Tarefas - Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Uma API REST simples e robusta para gerenciamento de tarefas, construída com **Laravel 12** e autenticação **Laravel Sanctum**.
 
-## About Laravel
+## 🚀 Tecnologias Utilizadas
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Laravel 12** - Framework PHP
+- **Laravel Sanctum** - Autenticação de API
+- **MySQL/PostgreSQL** - Banco de dados
+- **PHP 8.3+** - Linguagem de programação
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## ⚡ Funcionalidades
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- ✅ Autenticação segura com tokens
+- ✅ CRUD completo de tarefas
+- ✅ Filtragem por status
+- ✅ Paginação automática
+- ✅ Validação robusta de dados
+- ✅ Tratamento de erros padronizado
+- ✅ Autorização por usuário
 
-## Learning Laravel
+## 📋 Pré-requisitos
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- PHP 8.3 ou superior
+- Composer
+- MySQL ou PostgreSQL
+- Node.js (opcional, para assets)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 🔧 Instalação e Configuração
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 1. Clone o repositório
+```bash
+git clone https://github.com/seu-usuario/api-tarefas.git
+cd api-tarefas
+```
 
-## Laravel Sponsors
+### 2. Instale as dependências
+```bash
+composer install
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 3. Configure o ambiente
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-### Premium Partners
+### 4. Configure o banco de dados
+Edite o arquivo `.env` com suas credenciais:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=api_tarefas
+DB_USERNAME=seu_usuario
+DB_PASSWORD=sua_senha
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 5. Execute as migrações
+```bash
+php artisan migrate
+```
 
-## Contributing
+### 6. Configure o Sanctum
+```bash
+php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+php artisan migrate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 7. Inicie o servidor
+```bash
+php artisan serve
+```
 
-## Code of Conduct
+A API estará disponível em: `http://localhost:8000`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🔐 Autenticação
 
-## Security Vulnerabilities
+Esta API utiliza **Laravel Sanctum** para autenticação baseada em tokens.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Registro de Usuário
+```http
+POST /api/register
+Content-Type: application/json
 
-## License
+{
+    "name": "João Silva",
+    "email": "joao@exemplo.com",
+    "password": "senha123",
+    "password_confirmation": "senha123"
+}
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Login
+```http
+POST /api/login
+Content-Type: application/json
+
+{
+    "email": "joao@exemplo.com",
+    "password": "senha123"
+}
+```
+
+**Resposta:**
+```json
+{
+    "success": true,
+    "message": "Login realizado com sucesso",
+    "data": {
+        "user": {
+            "id": 1,
+            "name": "João Silva",
+            "email": "joao@exemplo.com"
+        },
+        "token": "1|abc123def456..."
+    }
+}
+```
+
+### Logout
+```http
+POST /api/logout
+Authorization: Bearer {seu-token}
+```
+
+## 📚 Endpoints da API
+
+### Base URL
+```
+http://localhost:8000/api
+```
+
+Todas as rotas de tarefas requerem autenticação. Inclua o header:
+```
+Authorization: Bearer {seu-token}
+```
+
+### Tarefas
+
+#### Listar Tarefas
+```http
+GET /api/tasks
+```
+
+**Parâmetros de Query (opcionais):**
+- `status`: `pending`, `in_progress`, `completed`
+- `page`: número da página (padrão: 1)
+- `per_page`: itens por página (padrão: 10, máx: 100)
+
+**Exemplo:**
+```http
+GET /api/tasks?status=pending&page=1&per_page=5
+```
+
+**Resposta:**
+```json
+{
+    "success": true,
+    "data": [
+        {
+            "id": 1,
+            "title": "Estudar Laravel",
+            "description": "Aprender sobre APIs REST",
+            "status": "pending",
+            "user_id": 1,
+            "created_at": "2024-01-15T10:30:00.000000Z",
+            "updated_at": "2024-01-15T10:30:00.000000Z"
+        }
+    ],
+    "pagination": {
+        "current_page": 1,
+        "last_page": 3,
+        "per_page": 5,
+        "total": 15
+    }
+}
+```
+
+#### Criar Tarefa
+```http
+POST /api/tasks
+Content-Type: application/json
+
+{
+    "title": "Nova Tarefa",
+    "description": "Descrição da tarefa",
+    "status": "pending"
+}
+```
+
+**Campos:**
+- `title` (obrigatório): string, 3-255 caracteres
+- `description` (opcional): string, máx 1000 caracteres  
+- `status` (opcional): `pending`, `in_progress`, `completed` (padrão: `pending`)
+
+#### Visualizar Tarefa
+```http
+GET /api/tasks/{id}
+```
+
+#### Atualizar Tarefa
+```http
+PUT /api/tasks/{id}
+Content-Type: application/json
+
+{
+    "title": "Título Atualizado",
+    "status": "completed"
+}
+```
+
+**Campos (todos opcionais):**
+- `title`: string, 3-255 caracteres
+- `description`: string, máx 1000 caracteres
+- `status`: `pending`, `in_progress`, `completed`
+
+#### Deletar Tarefa
+```http
+DELETE /api/tasks/{id}
+```
+
+## 📊 Status das Tarefas
+
+- `pending` - Pendente
+- `in_progress` - Em Progresso  
+- `completed` - Concluída
+
+## ⚠️ Tratamento de Erros
+
+A API retorna erros em formato JSON padronizado:
+
+### Erro de Validação (422)
+```json
+{
+    "success": false,
+    "message": "Dados de entrada inválidos",
+    "errors": {
+        "title": ["O título é obrigatório."]
+    }
+}
+```
+
+### Erro de Autorização (403)
+```json
+{
+    "success": false,
+    "message": "Acesso negado",
+    "error": "Você não tem permissão para acessar este recurso"
+}
+```
+
+### Erro de Autenticação (401)
+```json
+{
+    "success": false,
+    "message": "Não autenticado",
+    "error": "Token de acesso inválido ou expirado"
+}
+```
+
+### Recurso Não Encontrado (404)
+```json
+{
+    "success": false,
+    "message": "Recurso não encontrado",
+    "error": "O recurso solicitado não existe"
+}
+```
+
+## 🧪 Testando a API
+
+### Usando cURL
+
+**1. Registrar usuário:**
+```bash
+curl -X POST http://localhost:8000/api/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Teste User",
+    "email": "teste@exemplo.com",
+    "password": "senha123",
+    "password_confirmation": "senha123"
+  }'
+```
+
+**2. Fazer login e obter token:**
+```bash
+curl -X POST http://localhost:8000/api/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "teste@exemplo.com",
+    "password": "senha123"
+  }'
+```
+
+**3. Criar tarefa:**
+```bash
+curl -X POST http://localhost:8000/api/tasks \
+  -H "Authorization: Bearer SEU_TOKEN_AQUI" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Minha primeira tarefa",
+    "description": "Testando a API",
+    "status": "pending"
+  }'
+```
+
+**4. Listar tarefas:**
+```bash
+curl -X GET "http://localhost:8000/api/tasks" \
+  -H "Authorization: Bearer SEU_TOKEN_AQUI"
+```
+
+### Usando Postman/Insomnia
+
+1. Importe a collection (se disponível)
+2. Configure a variável de ambiente `token` após o login
+3. Teste todos os endpoints
+
+## 📁 Estrutura do Projeto
+
+```
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── AuthController.php
+│   │   │   └── TaskController.php
+│   │   └── Requests/
+│   │       ├── StoreTaskRequest.php
+│   │       └── UpdateTaskRequest.php
+│   ├── Models/
+│   │   ├── Task.php
+│   │   └── User.php
+│   └── Policies/
+│       └── TaskPolicy.php
+├── database/
+│   └── migrations/
+├── routes/
+│   └── api.php
+└── README.md
+```
+
+## 🤝 Contribuição
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`)
+3. Commit suas mudanças (`git commit -am 'Adiciona nova feature'`)
+4. Push para a branch (`git push origin feature/nova-feature`)
+5. Abra um Pull Request
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## 🆘 Suporte
+
+Se você encontrar algum problema ou tiver dúvidas:
+
+1. Verifique se seguiu todos os passos de instalação
+2. Confira os logs em `storage/logs/laravel.log`
+3. Abra uma issue no GitHub
+
+---
+
+**Desenvolvido com ❤️ usando Laravel**
