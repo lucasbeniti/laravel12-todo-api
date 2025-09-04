@@ -304,9 +304,3 @@ curl -X POST http://localhost:8000/api/tasks \
 curl -X GET "http://localhost:8000/api/tasks" \
   -H "Authorization: Bearer SEU_TOKEN_AQUI"
 ```
-
-### Usando Postman/Insomnia
-
-1. Importe a collection (se disponível)
-2. Configure a variável de ambiente `token` após o login
-3. Teste todos os endpoints
